@@ -1,19 +1,22 @@
+// App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import PostDetailPage from './pages/PostDetailPage';
 import AddPostPage from './pages/AddPostPage';
 
-function App() {
+const App = () => {
   return (
     <Router>
-      <Switch>
-        <Route path="/" exact component={HomePage} />
-        <Route path="/post/:id" component={PostDetailPage} />
-        <Route path="/add-post" component={AddPostPage} />
-      </Switch>
+      <div>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/post/:postId" component={PostDetailPage} />
+          <Route path="/add-post" component={AddPostPage} />
+        </Switch>
+      </div>
     </Router>
   );
-}
+};
 
 export default App;

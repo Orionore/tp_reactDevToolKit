@@ -1,22 +1,27 @@
+// pages/PostDetailPage/index.jsx
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchCommentsForPost } from '../redux/commentsSlice';
-import PostDetail from '../components/PostDetail';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPostByIdAsync, selectPostById } from '../../store/postsSlice';
 
 const PostDetailPage = () => {
-  const dispatch = useDispatch();
   const { postId } = useParams();
-  const post = useSelector((state) => state.posts.posts.find((p) => p.id === parseInt(postId)));
+  const dispatch = useDispatch();
+  const post = useSelector((state) => selectPostById(state, postId));
 
   useEffect(() => {
-    dispatch(fetchCommentsForPost(postId));
+    dispatch(fetchPostByIdAsync(postId));
   }, [dispatch, postId]);
 
   return (
     <div>
       <h1>Post Detail Page</h1>
-      <PostDetail post={post} />
+      {post && (
+        <div>
+          <h2>{post.title}</h2>
+          <p>{post.body}</p>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,24 +1,11 @@
-
-const BASE_URL = 'https://jsonplaceholder.typicode.com';
+// api/posts/posts.jsx
+import axios from 'axios';
 
 export const fetchPosts = async () => {
-  const response = await fetch(`${BASE_URL}/posts`);
-  if (!response.ok) {
-    throw new Error('Failed to fetch posts');
+  try {
+    const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+    return response.data;
+  } catch (error) {
+    throw new Error('Error fetching posts');
   }
-  return response.json();
-};
-
-export const addPost = async (postData) => {
-  const response = await fetch(`${BASE_URL}/posts`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(postData),
-  });
-  if (!response.ok) {
-    throw new Error('Failed to add post');
-  }
-  return response.json();
 };

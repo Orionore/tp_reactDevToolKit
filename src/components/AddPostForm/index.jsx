@@ -1,9 +1,9 @@
-// pages/AddPostPage/index.jsx
+// components/AddPostForm/index.jsx
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { addPostAsync } from '../../store/postsSlice';
 
-const AddPostPage = () => {
+const AddPostForm = () => {
   const dispatch = useDispatch();
 
   const handleAddPost = () => {
@@ -18,10 +18,10 @@ const AddPostPage = () => {
 
   return (
     <div>
-      <h1>Add Post Page</h1>
+      <h1>Ajouter un Post</h1>
       <button onClick={handleAddPost}>Ajouter un post</button>
     </div>
   );
 };
 
-export default AddPostPage;
+export default AddPostForm;

@@ -1,10 +1,10 @@
-// pages/HomePage/index.jsx
+// components/Home/index.jsx
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchPostsAsync, selectAllPosts } from '../../store/postsSlice';
 
-const HomePage = () => {
+const Home = () => {
   const dispatch = useDispatch();
   const posts = useSelector(selectAllPosts);
 
@@ -26,4 +26,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Home;
