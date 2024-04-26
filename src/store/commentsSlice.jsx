@@ -1,4 +1,4 @@
-// store/commentsSlice.jsx
+// store/commentsSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchComments } from '../api/comments';
 
@@ -6,7 +6,7 @@ export const fetchCommentsAsync = createAsyncThunk(
   'comments/fetchComments',
   async () => {
     const response = await fetchComments();
-    return response.data;
+    return response;
   }
 );
 

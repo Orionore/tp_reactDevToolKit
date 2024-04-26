@@ -1,5 +1,7 @@
+// store/postsSlice.jsx
+
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { addPost, fetchPosts, fetchPostById } from '../api/posts'; // Correction de l'importation
+import { addPost, fetchPosts, fetchPostById } from '../api/posts';
 
 export const fetchPostsAsync = createAsyncThunk(
   'posts/fetchPosts',
@@ -12,7 +14,7 @@ export const fetchPostsAsync = createAsyncThunk(
 export const fetchPostByIdAsync = createAsyncThunk(
   'posts/fetchPostById',
   async (postId) => {
-    const response = await fetchPostById(postId); // Utilisation correcte de fetchPostById
+    const response = await fetchPostById(postId);
     return response.data;
   }
 );
@@ -25,13 +27,15 @@ export const addPostAsync = createAsyncThunk(
   }
 );
 
+const initialState = {
+  posts: [],
+  status: 'idle',
+  error: null,
+};
+
 const postsSlice = createSlice({
   name: 'posts',
-  initialState: {
-    posts: [],
-    status: 'idle',
-    error: null,
-  },
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -51,7 +55,10 @@ const postsSlice = createSlice({
       })
       .addCase(fetchPostByIdAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.posts = [action.payload]; // Correction de la façon dont les détails du post sont stockés
+        const updatedPostIndex = state.posts.findIndex(post => post.id === action.payload.id);
+        if (updatedPostIndex !== -1) {
+          state.posts[updatedPostIndex] = action.payload;
+        }
       })
       .addCase(fetchPostByIdAsync.rejected, (state, action) => {
         state.status = 'error';
@@ -62,7 +69,7 @@ const postsSlice = createSlice({
       })
       .addCase(addPostAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.posts.push(action.payload); // Ajout du nouveau post à la liste
+        state.posts.push(action.payload);
       })
       .addCase(addPostAsync.rejected, (state, action) => {
         state.status = 'error';

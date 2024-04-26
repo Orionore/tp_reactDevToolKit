@@ -1,3 +1,4 @@
+// api/posts/index.jsx
 export const fetchPosts = async () => {
   try {
     const response = await fetch('https://jsonplaceholder.typicode.com/posts');
@@ -10,7 +11,7 @@ export const fetchPosts = async () => {
   }
 };
 
-export const fetchPostById = async (postId) => { // Assurez-vous que fetchPostById est correctement exportée
+export const fetchPostById = async (postId) => {
   try {
     const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`);
     if (!response.ok) {
@@ -37,5 +38,37 @@ export const addPost = async (newPost) => {
     return response.json();
   } catch (error) {
     throw new Error('Error adding post');
+  }
+};
+
+export const updatePost = async (postId, updatedPost) => {
+  try {
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedPost),
+    });
+    if (!response.ok) {
+      throw new Error('Error updating post');
+    }
+    return response.json();
+  } catch (error) {
+    throw new Error('Error updating post');
+  }
+};
+
+export const deletePost = async (postId) => {
+  try {
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`, {
+      method: 'DELETE',
+    });
+    if (!response.ok) {
+      throw new Error('Error deleting post');
+    }
+    return response.json();
+  } catch (error) {
+    throw new Error('Error deleting post');
   }
 };
