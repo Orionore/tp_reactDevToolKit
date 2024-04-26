@@ -1,8 +1,7 @@
-// pages/PostDetailPage/index.jsx
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPostByIdAsync, selectPostById } from '../../store/postsSlice';
+import { fetchPostByIdAsync } from '../../store/postsSlice'; // Mettez à jour l'importation
 
 const PostDetailPage = () => {
   const { postId } = useParams();
@@ -10,7 +9,7 @@ const PostDetailPage = () => {
   const post = useSelector((state) => selectPostById(state, postId));
 
   useEffect(() => {
-    dispatch(fetchPostByIdAsync(postId));
+    dispatch(fetchPostByIdAsync(postId)); // Utilisez fetchPostByIdAsync
   }, [dispatch, postId]);
 
   return (

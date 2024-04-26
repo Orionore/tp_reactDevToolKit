@@ -1,13 +1,12 @@
-// index.js
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App'; // Import du composant racine de l'application
-import { Provider } from 'react-redux'; // Import du Provider pour Redux
-import { store } from './store'; // Import du Redux Store
+import { createRoot } from 'react-dom/client'; // Importer createRoot à partir de 'react-dom/client'
+import App from './App';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
-ReactDOM.render(
-  <Provider store={store}> {/* Fournit le Redux Store à toute l'application */}
-    <App /> {/* Rendu du composant racine de l'application */}
-  </Provider>,
-  document.getElementById('root') // Point d'entrée dans le DOM pour l'application
+// Utiliser createRoot au lieu de ReactDOM.render
+createRoot(document.getElementById('root')).render(
+  <Provider store={store}>
+    <App />
+  </Provider>
 );

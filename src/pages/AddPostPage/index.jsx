@@ -1,4 +1,3 @@
-// pages/AddPostPage/index.jsx
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { addPostAsync } from '../../store/postsSlice';
@@ -7,9 +6,8 @@ const AddPostPage = () => {
   const dispatch = useDispatch();
 
   const handleAddPost = () => {
-    // Logique pour ajouter un post
     const newPost = {
-      userId: 1, // Utilisateur avec l'ID 1
+      userId: 1,
       title: 'Nouveau post',
       body: 'Contenu du nouveau post',
     };
